@@ -10,9 +10,6 @@ const setSlidePosition = (slide, i) => {
     return (slide.style.left =
         slide.childNodes[3].getBoundingClientRect().width * i + 'px');
 };
-
-// When the window is resized, fetch the new sizes
-window.addEventListener('resize', setSlidePosition);
 slides.forEach(setSlidePosition);
 
 /**
