@@ -25,6 +25,7 @@ nextButton.addEventListener('click', (e) => {
     const nextSlide = currentSlide.nextElementSibling;
     const nextIndex = slides.findIndex((slide) => slide === nextSlide);
     moveToSlide(track, currentSlide, nextSlide);
+    hideShowArrows(slides, prevButton, nextButton, nextIndex);
 });
 
 prevButton.addEventListener('click', (e) => {
@@ -32,4 +33,19 @@ prevButton.addEventListener('click', (e) => {
     const prevSlide = currentSlide.previousElementSibling;
     const prevIndex = slides.findIndex((slide) => slide === prevSlide);
     moveToSlide(track, currentSlide, prevSlide);
+    hideShowArrows(slides, prevButton, nextButton, prevIndex);
 });
+
+// Control Visibility
+const hideShowArrows = (slides, prevButton, nextButton, targetIndex) => {
+    if (targetIndex === 0) {
+        prevButton.classList.add('hidden');
+        nextButton.classList.remove('hidden');
+    } else if (targetIndex === slides.length - 1) {
+        prevButton.classList.remove('hidden');
+        nextButton.classList.add('hidden');
+    } else {
+        prevButton.classList.remove('hidden');
+        nextButton.classList.remove('hidden');
+    }
+};
