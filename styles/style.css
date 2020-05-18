@@ -146,7 +146,7 @@ body {
 .carousel {
     position: relative;
     height: 600px;
-    width: 70%;
+    width: 100%;
     margin: 0 auto;
 }
 
@@ -183,18 +183,15 @@ body {
 img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
 }
 
 .controls {
-    top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     display: flex;
-    position: absolute;
-    align-items: center;
-    pointer-events: none;
+    position: relative;
     justify-content: space-between;
 }
 
@@ -208,25 +205,9 @@ img {
     border-radius: 50%;
     margin-left: 8px;
     margin-right: 8px;
-    pointer-events: all;
-    background-color: white;
-    cursor: pointer;
+    z-index: 20;
 }
 
-.arrow__label {
-    width: 100%;
-    display: inherit;
-    align-items: inherit;
-    justify-content: inherit;
-}
-.arrow__inner {
-    fill: currentColor;
-    width: 1em;
-    height: 1em;
-    display: inline-block;
-    font-size: 3rem;
-    transform: translate(-2px, 3px);
-}
 .arrow__right {
     transform: rotate(180deg);
 }
@@ -241,4 +222,55 @@ img {
     height: 1px;
     overflow: hidden;
     position: absolute;
+}
+
+@media (min-width: 996px) {
+    .carousel {
+        height: 700px;
+        width: 70%;
+    }
+    .controls {
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        position: absolute;
+        align-items: center;
+        pointer-events: none;
+        justify-content: space-between;
+    }
+    .arrow {
+        width: 80px;
+        height: 80px;
+        font-size: 0.875rem;
+        min-height: 36px;
+        font-weight: 500;
+        line-height: 1.75;
+        border-radius: 50%;
+        margin-left: 8px;
+        margin-right: 8px;
+        pointer-events: all;
+        background-color: white;
+        cursor: pointer;
+    }
+    .arrow__label {
+        width: 100%;
+        display: inherit;
+        align-items: inherit;
+        justify-content: inherit;
+    }
+    .arrow__inner {
+        fill: currentColor;
+        width: 1em;
+        height: 1em;
+        display: inline-block;
+        font-size: 3rem;
+        transform: translate(-2px, 3px);
+    }
+
+    img {
+        width: 100%;
+        object-fit: contain;
+    }
 }
