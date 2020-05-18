@@ -128,14 +128,25 @@ table {
     border-spacing: 0;
 }
 
+:root {
+    --background-primary: #0f0e14;
+    --foreground-primary: #111111;
+    --background-secondary: #ffffff;
+    --foreground-secondary: #333333;
+    --anchor: #c3e1ff;
+    --anchor-change: #5ca6f0;
+    --accent: #3a3a3a;
+    --shade: #d3d3d3;
+}
+
 body {
-    background: #333333;
+    background: var(--background-primary);
 }
 
 .carousel {
     position: relative;
     height: 600px;
-    width: 80%;
+    width: 70%;
     margin: 0 auto;
 }
 
@@ -158,29 +169,76 @@ body {
     width: 100%;
 }
 
+.slide__counter {
+    position: absolute;
+    color: white;
+    text-shadow: 2px 2px 2px black;
+    font-size: 2rem;
+    width: 90%;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+}
+
 img {
     width: 100%;
     height: 100%;
     object-fit: contain;
 }
 
-.carousel__button {
+.controls {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: white;
+    align-items: center;
+    pointer-events: none;
+    justify-content: space-between;
+}
+
+.arrow {
+    width: 80px;
+    height: 80px;
+    font-size: 0.875rem;
+    min-height: 36px;
+    font-weight: 500;
+    line-height: 1.75;
+    border-radius: 50%;
+    margin-left: 8px;
+    margin-right: 8px;
+    pointer-events: all;
+    background-color: white;
     cursor: pointer;
-    z-index: 99;
 }
 
-.carousel__button.left {
-    left: -40px;
+.arrow__label {
+    width: 100%;
+    display: inherit;
+    align-items: inherit;
+    justify-content: inherit;
 }
-
-.carousel__button.right {
-    right: -40px;
+.arrow__inner {
+    fill: currentColor;
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    font-size: 3rem;
+    transform: translate(-2px, 3px);
+}
+.arrow__right {
+    transform: rotate(180deg);
 }
 
 .hidden {
-    display: none;
+    visibility: hidden;
+    z-index: -1;
+}
+
+.sr-only {
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
 }

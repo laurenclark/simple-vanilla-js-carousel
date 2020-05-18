@@ -2,13 +2,13 @@ const track = document.querySelector('.carousel__track');
 const slides = Array.from(track.children);
 
 // Controls
-const nextButton = document.querySelector('.carousel__button.right');
-const prevButton = document.querySelector('.carousel__button.left');
+const nextButton = document.querySelector('.arrow__right');
+const prevButton = document.querySelector('.arrow__left');
 
 // Slide positioning
 const setSlidePosition = (slide, i) => {
     return (slide.style.left =
-        slide.childNodes[1].getBoundingClientRect().width * i + 'px');
+        slide.childNodes[3].getBoundingClientRect().width * i + 'px');
 };
 slides.forEach(setSlidePosition);
 
@@ -17,6 +17,27 @@ const moveToSlide = (track, currentSlide, targetSlide) => {
     track.style.transform = `translateX(-${targetSlide.style.left})`;
     currentSlide.classList.remove('slide--current');
     targetSlide.classList.add('slide--current');
+    targetSlide.querySelector(
+        '.slide__counter'
+    ).dataset.count = increaseCounter(
+        targetSlide.querySelector('.slide__counter').dataset.count
+    );
+    updateCounter(targetSlide);
+};
+
+// Increase Counter
+const increaseCounter = (count) => {
+    count = parseInt(count);
+    return (count += 1);
+};
+
+// Update Counter
+const updateCounter = (targetSlide) => {
+    const counter = targetSlide.querySelector('.slide__counter');
+    counter.textContent =
+        counter.dataset.count < 2
+            ? 'Viewed 1 time'
+            : `Viewed ${counter.dataset.count} times`;
 };
 
 // Button Handlers
