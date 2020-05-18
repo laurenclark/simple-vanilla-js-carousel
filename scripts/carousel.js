@@ -12,26 +12,38 @@ const setSlidePosition = (slide, i) => {
 };
 slides.forEach(setSlidePosition);
 
-// Slide Movement
+/**
+ * Slide Movement
+ *
+ * @param {Object} htmlElement
+ * @param {Obect} htmlElement
+ * @param {Object} htmlElement
+ */
+
 const moveToSlide = (track, currentSlide, targetSlide) => {
+    const counterEl = targetSlide.querySelector('.slide__counter');
     track.style.transform = `translateX(-${targetSlide.style.left})`;
     currentSlide.classList.remove('slide--current');
     targetSlide.classList.add('slide--current');
-    targetSlide.querySelector(
-        '.slide__counter'
-    ).dataset.count = increaseCounter(
-        targetSlide.querySelector('.slide__counter').dataset.count
-    );
+    counterEl.dataset.count = increaseCounter(counterEl.dataset.count);
     updateCounter(targetSlide);
 };
 
-// Increase Counter
+/**
+ * Increase Counter
+ *
+ * @param {String} NumberAsString
+ */
 const increaseCounter = (count) => {
     count = parseInt(count);
     return (count += 1);
 };
 
-// Update Counter
+/**
+ * Update Counter
+ *
+ * @param {Object} htmlElement
+ */
 const updateCounter = (targetSlide) => {
     const counter = targetSlide.querySelector('.slide__counter');
     counter.textContent =
@@ -40,7 +52,9 @@ const updateCounter = (targetSlide) => {
             : `Viewed ${counter.dataset.count} times`;
 };
 
-// Button Handlers
+/**
+ * Next Slide Handler
+ */
 nextButton.addEventListener('click', (e) => {
     const currentSlide = track.querySelector('.slide--current');
     const nextSlide = currentSlide.nextElementSibling;
@@ -49,6 +63,9 @@ nextButton.addEventListener('click', (e) => {
     hideShowArrows(slides, prevButton, nextButton, nextIndex);
 });
 
+/**
+ * Prev Slide Handler
+ */
 prevButton.addEventListener('click', (e) => {
     const currentSlide = track.querySelector('.slide--current');
     const prevSlide = currentSlide.previousElementSibling;
@@ -57,7 +74,14 @@ prevButton.addEventListener('click', (e) => {
     hideShowArrows(slides, prevButton, nextButton, prevIndex);
 });
 
-// Control Visibility
+/**
+ * Control Visibility
+ *
+ * @param {Object} htmlElement
+ * @param {Object} htmlElement
+ * @param {Object} htmlElement
+ * @param {Number} index
+ */
 const hideShowArrows = (slides, prevButton, nextButton, targetIndex) => {
     if (targetIndex === 0) {
         prevButton.classList.add('hidden');
