@@ -101,39 +101,31 @@ const hideShowArrows = (slides, prevButton, nextButton, targetIndex) => {
 };
 
 const initMobileSwipe = () => {
-    let xDown = null;
-    let yDown = null;
+    let dirRight = null;
     function getTouches(event) {
         return event.touches || event.originalEvent.touches;
     }
 
     function handleTouchStart(event) {
         const firstTouch = getTouches(event)[0];
-        xDown = firstTouch.clientX;
-        yDown = firstTouch.clientY;
+        dirRight = firstTouch.clientX;
     }
 
     function handleTouchMove(event) {
-        if (!xDown || !yDown) {
+        if (!dirRight) {
             return;
         }
+        let dirLeft = event.touches[0].clientX;
+        const diff = dirRight - dirLeft;
 
-        let xUp = event.touches[0].clientX;
-        let yUp = event.touches[0].clientY;
-
-        const xDiff = xDown - xUp;
-        const yDiff = yDown - yUp;
-
-        if (Math.abs(xDiff) > Math.abs(yDiff)) {
-            if (xDiff > 0) {
-                nextSlideHandler();
-            } else {
-                prevSlideHandler();
-            }
+        if (diff > 0) {
+            nextSlideHandler();
+        } else {
+            prevSlideHandler();
         }
-        /* reset values */
-        xDown = null;
-        yDown = null;
+
+        /* reset */
+        dirRight = null;
     }
     document.addEventListener('touchstart', handleTouchStart, false);
     document.addEventListener('touchmove', handleTouchMove, false);
