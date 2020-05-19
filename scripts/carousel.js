@@ -53,26 +53,31 @@ const updateCounter = (targetSlide) => {
 };
 
 /**
- * Next Slide Handler
+ * Handlers
  */
-nextButton.addEventListener('click', (e) => {
+
+const nextSlideHandler = () => {
     const currentSlide = track.querySelector('.slide--current');
     const nextSlide = currentSlide.nextElementSibling;
     const nextIndex = slides.findIndex((slide) => slide === nextSlide);
     moveToSlide(track, currentSlide, nextSlide);
     hideShowArrows(slides, prevButton, nextButton, nextIndex);
-});
+};
 
-/**
- * Prev Slide Handler
- */
-prevButton.addEventListener('click', (e) => {
+const prevSlideHandler = () => {
     const currentSlide = track.querySelector('.slide--current');
     const prevSlide = currentSlide.previousElementSibling;
     const prevIndex = slides.findIndex((slide) => slide === prevSlide);
     moveToSlide(track, currentSlide, prevSlide);
     hideShowArrows(slides, prevButton, nextButton, prevIndex);
-});
+};
+
+/**
+ * Listeners
+ */
+
+nextButton.addEventListener('click', nextSlideHandler);
+prevButton.addEventListener('click', prevSlideHandler);
 
 /**
  * Control Visibility
@@ -95,49 +100,43 @@ const hideShowArrows = (slides, prevButton, nextButton, targetIndex) => {
     }
 };
 
-document.addEventListener('touchstart', handleTouchStart, false);
-document.addEventListener('touchmove', handleTouchMove, false);
-
-var xDown = null;
-var yDown = null;
-
-function getTouches(event) {
-    return event.touches || event.originalEvent.touches;
-}
-
-function handleTouchStart(event) {
-    const firstTouch = getTouches(event)[0];
-    xDown = firstTouch.clientX;
-    yDown = firstTouch.clientY;
-}
-
-function handleTouchMove(event) {
-    if (!xDown || !yDown) {
-        return;
+const initMobileSwipe = () => {
+    let xDown = null;
+    let yDown = null;
+    function getTouches(event) {
+        return event.touches || event.originalEvent.touches;
     }
 
-    var xUp = event.touches[0].clientX;
-    var yUp = event.touches[0].clientY;
+    function handleTouchStart(event) {
+        const firstTouch = getTouches(event)[0];
+        xDown = firstTouch.clientX;
+        yDown = firstTouch.clientY;
+    }
 
-    var xDiff = xDown - xUp;
-    var yDiff = yDown - yUp;
-
-    if (Math.abs(xDiff) > Math.abs(yDiff)) {
-        if (xDiff > 0) {
-            const currentSlide = track.querySelector('.slide--current');
-            const nextSlide = currentSlide.nextElementSibling;
-            const nextIndex = slides.findIndex((slide) => slide === nextSlide);
-            moveToSlide(track, currentSlide, nextSlide);
-            hideShowArrows(slides, prevButton, nextButton, nextIndex);
-        } else {
-            const currentSlide = track.querySelector('.slide--current');
-            const prevSlide = currentSlide.previousElementSibling;
-            const prevIndex = slides.findIndex((slide) => slide === prevSlide);
-            moveToSlide(track, currentSlide, prevSlide);
-            hideShowArrows(slides, prevButton, nextButton, prevIndex);
+    function handleTouchMove(event) {
+        if (!xDown || !yDown) {
+            return;
         }
+
+        let xUp = event.touches[0].clientX;
+        let yUp = event.touches[0].clientY;
+
+        const xDiff = xDown - xUp;
+        const yDiff = yDown - yUp;
+
+        if (Math.abs(xDiff) > Math.abs(yDiff)) {
+            if (xDiff > 0) {
+                nextSlideHandler();
+            } else {
+                prevSlideHandler();
+            }
+        }
+        /* reset values */
+        xDown = null;
+        yDown = null;
     }
-    /* reset values */
-    xDown = null;
-    yDown = null;
-}
+    document.addEventListener('touchstart', handleTouchStart, false);
+    document.addEventListener('touchmove', handleTouchMove, false);
+};
+
+initMobileSwipe();
