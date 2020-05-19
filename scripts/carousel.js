@@ -100,6 +100,10 @@ const hideShowArrows = (slides, prevButton, nextButton, targetIndex) => {
     }
 };
 
+/**
+ * Swipe
+ */
+
 const initMobileSwipe = () => {
     let dirRight = null;
     function getTouches(event) {
@@ -130,5 +134,9 @@ const initMobileSwipe = () => {
     document.addEventListener('touchstart', handleTouchStart, false);
     document.addEventListener('touchmove', handleTouchMove, false);
 };
+
+/**
+ * Swipe Initialiser
+ */
 
 initMobileSwipe();
