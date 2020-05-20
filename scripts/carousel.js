@@ -53,6 +53,27 @@ const updateCounter = (targetSlide) => {
 };
 
 /**
+ * Control Visibility
+ *
+ * @param {Object} htmlElement
+ * @param {Object} htmlElement
+ * @param {Object} htmlElement
+ * @param {Number} index
+ */
+const hideShowArrows = (slides, prevButton, nextButton, targetIndex) => {
+    if (targetIndex === 0) {
+        prevButton.classList.add('hidden');
+        nextButton.classList.remove('hidden');
+    } else if (targetIndex === slides.length - 1) {
+        prevButton.classList.remove('hidden');
+        nextButton.classList.add('hidden');
+    } else {
+        prevButton.classList.remove('hidden');
+        nextButton.classList.remove('hidden');
+    }
+};
+
+/**
  * Handlers
  */
 
@@ -78,27 +99,6 @@ const prevSlideHandler = () => {
 
 nextButton.addEventListener('click', nextSlideHandler);
 prevButton.addEventListener('click', prevSlideHandler);
-
-/**
- * Control Visibility
- *
- * @param {Object} htmlElement
- * @param {Object} htmlElement
- * @param {Object} htmlElement
- * @param {Number} index
- */
-const hideShowArrows = (slides, prevButton, nextButton, targetIndex) => {
-    if (targetIndex === 0) {
-        prevButton.classList.add('hidden');
-        nextButton.classList.remove('hidden');
-    } else if (targetIndex === slides.length - 1) {
-        prevButton.classList.remove('hidden');
-        nextButton.classList.add('hidden');
-    } else {
-        prevButton.classList.remove('hidden');
-        nextButton.classList.remove('hidden');
-    }
-};
 
 /**
  * Swipe
