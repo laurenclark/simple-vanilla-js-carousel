@@ -1,0 +1,43 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es6": true,
+        "node": true
+    },
+    "extends": ["eslint:recommended"],
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "sourceType": "module"
+    },
+    "rules": {
+        "vue/html-indent": "off",
+        "no-const-assign": "warn",
+        "comma-dangle": ["error", "never"],
+        "linebreak-style": "off",
+        "no-this-before-super": "warn",
+        "no-undef": "warn",
+        "no-unreachable": "warn",
+        "no-unused-vars": "warn",
+        "constructor-super": "warn",
+        "valid-typeof": "warn",
+        "eqeqeq": ["error", "always"],
+        "no-alert": "error",
+        "indent": "off",
+        "array-element-newline": "never",
+        "import/no-unresolved": 0,
+        "import/no-unassigned-import": 0,
+        "semi": ["error", "never"],
+        "no-console": "off",
+        "space-before-function-paren": [
+            "error",
+            {
+                "anonymous": "always",
+                "named": "always",
+                "asyncArrow": "always"
+            }
+        ]
+    }
+}
